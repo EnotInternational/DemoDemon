@@ -1,5 +1,7 @@
 ﻿using DemoDemon.Forms;
 using DemoDemon.Model;
+using DemoDemon.Model.Entities;
+using DemoDemon.Model.Servicies;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +19,7 @@ namespace DemoDemon.Controls
     {
         private int productId;
         private MainModel model;
+        public event Action<int> OnDelete;
         public ProductViewControl()
         {
             InitializeComponent();
@@ -42,15 +45,21 @@ namespace DemoDemon.Controls
             if (String.IsNullOrEmpty(product.image)) return;
             string ImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", product.image);
             pictureBox1.ImageLocation = ImagePath;
+
+            deleteButton.Visible = AuthService.Instance.UserData.ProductConstraint.HasFlag(UserConstraint.Delete);
+            editButton.Visible = AuthService.Instance.UserData.ProductConstraint.HasFlag(UserConstraint.Edit);
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-
+            OnDelete?.Invoke(productId);
         }
 
         private void orderButton_Click(object sender, EventArgs e)
         {
+            ProductEditForm productEditForm = new ProductEditForm(productId);
+            productEditForm.PreviousForm = ParentForm;
+            productEditForm.Show();
 
         }
         protected override void OnHandleDestroyed(EventArgs e)

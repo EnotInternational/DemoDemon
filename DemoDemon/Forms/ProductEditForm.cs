@@ -34,6 +34,9 @@ namespace DemoDemon.Forms
             model.Manufacturer.Load();
             model.User.Load();
             subcategoryBindingSource.DataSource = model.Subcategory.Local.ToBindingList();
+
+            GetAvailableSizes(productId).Load();
+            sizeBindingSource.DataSource = model.Size.Local.ToBindingList();
             manufacturerBindingSource.DataSource = model.Manufacturer.Local.ToBindingList();
             pictureBox1.ImageLocation = Path.Combine(ImageService.GetImageFolderPath(), product.image);
             openFileDialog1.Filter = "Изображения (*.png; *.jpg; *.jpeg; *.bmp) | *.png; *.jpg; *.jpeg; *.bmp";
@@ -61,6 +64,8 @@ namespace DemoDemon.Forms
                 }
             }
 
+
+
             product.image = openFileDialog1.SafeFileName;
             pictureBox1.ImageLocation = Path.Combine(ImageService.GetImageFolderPath(), product.image);
         }
@@ -74,6 +79,35 @@ namespace DemoDemon.Forms
         private void saveButton_Click(object sender, EventArgs e)
         {
             model.SaveChanges();
+        }
+
+        private void orderButton_Click(object sender, EventArgs e)
+        {
+            Model.Size size = (Model.Size)sizeBindingSource.Current;
+            OrderService.Instance.PendingOrder.OrderItem.Add(
+                new OrderItem()
+                {
+                    Product = product,
+                    Quantity = (int)quantityNumericUpDown.Value,
+                    UniyPrice = product.Price,
+                    SizeID = size.SizeID
+                }
+            );
+            model.SaveChanges();
+            MessageBox.Show("Заказ добавлен");
+        }
+
+        private void sizeDataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            orderButton.Enabled = true;
+        }
+
+        public IQueryable<Model.Size> GetAvailableSizes(int productId)
+        {
+            return from size in model.Size
+                   join stockItem in model.StockItem on size.SizeID equals stockItem.SizeID
+                   where stockItem.ProductID == productId
+                   select size;
         }
     }
 }

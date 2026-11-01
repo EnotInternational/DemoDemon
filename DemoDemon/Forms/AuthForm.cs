@@ -1,4 +1,5 @@
 ﻿using DemoDemon.Model;
+using DemoDemon.Model.Entities;
 using DemoDemon.Model.Servicies;
 using System;
 using System.Collections.Generic;
@@ -39,28 +40,17 @@ namespace DemoDemon.Forms
                     return;
                 }
 
-                AuthService.Instance.SetUserData(user.UserID, $"{user.MiddleName} {user.FirstName} {user.LastName}", (UserRole)user.RoleID);
+                AuthService.Instance.SetUserData(user.UserID, (UserRole)user.RoleID);
                 RouteUser((UserRole)user.RoleID);
             }
         }
 
         private void RouteUser(UserRole role)
         {
-            switch (role)
-            {
-                case UserRole.Guest:
-                    break;
-                case UserRole.AuthorisedUser:
-                    break;
-                case UserRole.Admin:
-                    break;
-                case UserRole.Manager:
-                    ManagerForm form = new ManagerForm();
-                    form.PreviousForm = this;
-                    Hide();
-                    form.Show();
-                    break;
-            }
+            BaseForm form = AuthService.Instance.UserData.BaseForm;
+            form.PreviousForm = this;
+            form.Show();
+            Hide();
         }
     }
 }

@@ -22,5 +22,13 @@ namespace DemoDemon.Forms
             productViewForm.Show();
             this.Hide();
         }
+
+        private void ordersButton_Click(object sender, EventArgs e)
+        {
+            OrdersForm orderForm = new OrdersForm();
+            orderForm.PreviousForm = this;
+            orderForm.Show();
+            this.Hide();
+        }
     }
 }

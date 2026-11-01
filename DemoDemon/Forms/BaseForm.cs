@@ -25,12 +25,17 @@ namespace DemoDemon.Forms
 
             if(AuthService.Instance != null)
             {
-                fioLabel.Text = AuthService.Instance.UserFio;
+                fioLabel.Text = AuthService.Instance.UserData.UserFio;
             }
         }
         private void backButton_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
             PreviousForm?.Show();
         }
     }

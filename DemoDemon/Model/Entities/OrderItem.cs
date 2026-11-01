@@ -25,7 +25,9 @@ namespace DemoDemon.Model
         public virtual Order Order { get; set; }
 
         public virtual Product Product { get; set; }
-
         public virtual Size Size { get; set; }
+        public virtual decimal SizeValue { get => Size.SizeValue; }
+        public virtual string ProductName { get => Product.ProductName; }
+        public virtual string ManufacturerName { get => Product.Manufacturer.ManufacturerName; }
     }
 }

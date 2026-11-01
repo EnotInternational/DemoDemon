@@ -82,6 +82,12 @@
     <Compile Include="Forms\ManagerForm.Designer.cs">
       <DependentUpon>ManagerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\OrdersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OrdersForm.Designer.cs">
+      <DependentUpon>OrdersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ProductEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,12 @@
     <Compile Include="Model\Entities\MainModel.cs" />
     <Compile Include="Model\Entities\Manufacturer.cs" />
     <Compile Include="Model\Entities\Order.cs" />
+    <Compile Include="Forms\OrderEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OrderEditForm.Designer.cs">
+      <DependentUpon>OrderEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\Entities\OrderItem.cs" />
     <Compile Include="Model\Entities\Product.cs" />
     <Compile Include="Model\Entities\Role.cs" />
@@ -105,8 +117,11 @@
     <Compile Include="Model\Entities\StockItem.cs" />
     <Compile Include="Model\Entities\Subcategory.cs" />
     <Compile Include="Model\Entities\User.cs" />
+    <Compile Include="Model\FormMode.cs" />
     <Compile Include="Model\Servicies\AuthService.cs" />
     <Compile Include="Model\Servicies\ImageService.cs" />
+    <Compile Include="Model\Servicies\OrderService.cs" />
+    <Compile Include="Model\UserData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\ProductViewControl.resx">
@@ -121,11 +136,17 @@
     <EmbeddedResource Include="Forms\ManagerForm.resx">
       <DependentUpon>ManagerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OrdersForm.resx">
+      <DependentUpon>OrdersForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProductEditForm.resx">
       <DependentUpon>ProductEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProductsViewForm.resx">
       <DependentUpon>ProductsViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OrderEditForm.resx">
+      <DependentUpon>OrderEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

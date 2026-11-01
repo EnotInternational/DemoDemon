@@ -22,6 +22,16 @@ namespace DemoDemon.Model
         public int? UserID { get; set; }
 
         public virtual User User { get; set; }
+        public string UserFio {
+            get
+            {
+                if (User != null)
+                {
+                    return User.Fio;
+                }
+                return "Нет";
+            }
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItem { get; set; }

@@ -18,6 +18,7 @@ namespace DemoDemon
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            OrderService orderService = new OrderService();
             AuthService authService = new AuthService();
             Application.Run(new AuthForm());
         }

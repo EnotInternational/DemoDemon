@@ -50,6 +50,15 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.saveButton = new System.Windows.Forms.Button();
+            this.sizeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sizeDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.orderButton = new System.Windows.Forms.Button();
+            this.quantityNumericUpDown = new System.Windows.Forms.NumericUpDown();
             compoundLabel = new System.Windows.Forms.Label();
             desctiptionLabel = new System.Windows.Forms.Label();
             manufacturerIDLabel = new System.Windows.Forms.Label();
@@ -62,6 +71,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sizeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sizeDataGridView)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.quantityNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // compoundLabel
@@ -221,19 +234,111 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(703, 403);
+            this.saveButton.Location = new System.Drawing.Point(680, 419);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.Size = new System.Drawing.Size(98, 23);
             this.saveButton.TabIndex = 20;
             this.saveButton.Text = "Сохранить";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
+            // sizeBindingSource
+            // 
+            this.sizeBindingSource.DataSource = typeof(DemoDemon.Model.Size);
+            // 
+            // sizeDataGridView
+            // 
+            this.sizeDataGridView.AllowUserToAddRows = false;
+            this.sizeDataGridView.AllowUserToResizeColumns = false;
+            this.sizeDataGridView.AllowUserToResizeRows = false;
+            this.sizeDataGridView.AutoGenerateColumns = false;
+            this.sizeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.sizeDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4});
+            this.sizeDataGridView.DataSource = this.sizeBindingSource;
+            this.sizeDataGridView.Location = new System.Drawing.Point(6, 21);
+            this.sizeDataGridView.MultiSelect = false;
+            this.sizeDataGridView.Name = "sizeDataGridView";
+            this.sizeDataGridView.RowHeadersWidth = 51;
+            this.sizeDataGridView.RowTemplate.Height = 24;
+            this.sizeDataGridView.Size = new System.Drawing.Size(176, 144);
+            this.sizeDataGridView.TabIndex = 20;
+            this.sizeDataGridView.SelectionChanged += new System.EventHandler(this.sizeDataGridView_SelectionChanged);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "SizeID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "SizeID";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            this.dataGridViewTextBoxColumn1.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "SizeValue";
+            this.dataGridViewTextBoxColumn2.HeaderText = "SizeValue";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "OrderItem";
+            this.dataGridViewTextBoxColumn3.HeaderText = "OrderItem";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Visible = false;
+            this.dataGridViewTextBoxColumn3.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "StockItem";
+            this.dataGridViewTextBoxColumn4.HeaderText = "StockItem";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Visible = false;
+            this.dataGridViewTextBoxColumn4.Width = 125;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.orderButton);
+            this.groupBox1.Controls.Add(this.quantityNumericUpDown);
+            this.groupBox1.Controls.Add(this.sizeDataGridView);
+            this.groupBox1.Location = new System.Drawing.Point(21, 364);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(336, 178);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
+            // 
+            // orderButton
+            // 
+            this.orderButton.Enabled = false;
+            this.orderButton.Location = new System.Drawing.Point(188, 142);
+            this.orderButton.Name = "orderButton";
+            this.orderButton.Size = new System.Drawing.Size(120, 23);
+            this.orderButton.TabIndex = 22;
+            this.orderButton.Text = "Заказать";
+            this.orderButton.UseVisualStyleBackColor = true;
+            this.orderButton.Click += new System.EventHandler(this.orderButton_Click);
+            // 
+            // quantityNumericUpDown
+            // 
+            this.quantityNumericUpDown.Location = new System.Drawing.Point(188, 21);
+            this.quantityNumericUpDown.Name = "quantityNumericUpDown";
+            this.quantityNumericUpDown.Size = new System.Drawing.Size(120, 22);
+            this.quantityNumericUpDown.TabIndex = 21;
+            // 
             // ProductEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 551);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
@@ -266,12 +371,17 @@
             this.Controls.SetChildIndex(this.pictureBox1, 0);
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.saveButton, 0);
+            this.Controls.SetChildIndex(this.groupBox1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.manufacturerBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.subcategoryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sizeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sizeDataGridView)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.quantityNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -294,5 +404,14 @@
         private System.Windows.Forms.BindingSource userBindingSource;
         private System.Windows.Forms.BindingSource subcategoryBindingSource;
         private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.BindingSource sizeBindingSource;
+        private System.Windows.Forms.DataGridView sizeDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.NumericUpDown quantityNumericUpDown;
+        private System.Windows.Forms.Button orderButton;
     }
 }
