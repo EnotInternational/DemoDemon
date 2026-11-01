@@ -49,7 +49,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.userComboBOx = new System.Windows.Forms.ComboBox();
+            this.saveButton = new System.Windows.Forms.Button();
             compoundLabel = new System.Windows.Forms.Label();
             desctiptionLabel = new System.Windows.Forms.Label();
             manufacturerIDLabel = new System.Windows.Forms.Label();
@@ -144,13 +144,13 @@
             // 
             this.manufacturerIDComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.productBindingSource, "ManufacturerID", true));
             this.manufacturerIDComboBox.DataSource = this.manufacturerBindingSource;
+            this.manufacturerIDComboBox.DisplayMember = "ManufacturerName";
             this.manufacturerIDComboBox.FormattingEnabled = true;
-            this.manufacturerIDComboBox.Location = new System.Drawing.Point(443, 248);
+            this.manufacturerIDComboBox.Location = new System.Drawing.Point(426, 243);
             this.manufacturerIDComboBox.Name = "manufacturerIDComboBox";
             this.manufacturerIDComboBox.Size = new System.Drawing.Size(242, 24);
             this.manufacturerIDComboBox.TabIndex = 9;
             this.manufacturerIDComboBox.ValueMember = "ManufacturerID";
-            this.manufacturerIDComboBox.SelectedIndexChanged += new System.EventHandler(this.manufacturerIDComboBox_SelectedIndexChanged);
             // 
             // manufacturerBindingSource
             // 
@@ -178,7 +178,7 @@
             this.subcategoryIDComboBox.DataSource = this.subcategoryBindingSource;
             this.subcategoryIDComboBox.DisplayMember = "FullCategoryName";
             this.subcategoryIDComboBox.FormattingEnabled = true;
-            this.subcategoryIDComboBox.Location = new System.Drawing.Point(443, 278);
+            this.subcategoryIDComboBox.Location = new System.Drawing.Point(426, 273);
             this.subcategoryIDComboBox.Name = "subcategoryIDComboBox";
             this.subcategoryIDComboBox.Size = new System.Drawing.Size(242, 24);
             this.subcategoryIDComboBox.TabIndex = 17;
@@ -219,23 +219,22 @@
             // 
             this.userBindingSource.DataSource = typeof(DemoDemon.Model.User);
             // 
-            // userComboBOx
+            // saveButton
             // 
-            this.userComboBOx.DataSource = this.userBindingSource;
-            this.userComboBOx.DisplayMember = "Fio";
-            this.userComboBOx.FormattingEnabled = true;
-            this.userComboBOx.Location = new System.Drawing.Point(443, 364);
-            this.userComboBOx.Name = "userComboBOx";
-            this.userComboBOx.Size = new System.Drawing.Size(121, 24);
-            this.userComboBOx.TabIndex = 20;
-            this.userComboBOx.ValueMember = "UserID";
+            this.saveButton.Location = new System.Drawing.Point(703, 403);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 20;
+            this.saveButton.Text = "Сохранить";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // ProductEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.userComboBOx);
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(compoundLabel);
@@ -266,7 +265,7 @@
             this.Controls.SetChildIndex(compoundLabel, 0);
             this.Controls.SetChildIndex(this.pictureBox1, 0);
             this.Controls.SetChildIndex(this.button1, 0);
-            this.Controls.SetChildIndex(this.userComboBOx, 0);
+            this.Controls.SetChildIndex(this.saveButton, 0);
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.manufacturerBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.subcategoryBindingSource)).EndInit();
@@ -294,6 +293,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.BindingSource userBindingSource;
         private System.Windows.Forms.BindingSource subcategoryBindingSource;
-        private System.Windows.Forms.ComboBox userComboBOx;
+        private System.Windows.Forms.Button saveButton;
     }
 }

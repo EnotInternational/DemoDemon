@@ -18,6 +18,7 @@ namespace DemoDemon.Forms
     {
         private int productId;
         MainModel model = new MainModel();
+        Product product;
         public ProductEditForm(int productId)
         {
             InitializeComponent();
@@ -27,12 +28,11 @@ namespace DemoDemon.Forms
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            Product product = model.Product.Find(productId);
+            product = model.Product.Find(productId);
             productBindingSource.DataSource = product;
             model.Subcategory.Load();
             model.Manufacturer.Load();
             model.User.Load();
-            userComboBOx.DataSource = model.User.Local.ToBindingList();
             subcategoryBindingSource.DataSource = model.Subcategory.Local.ToBindingList();
             manufacturerBindingSource.DataSource = model.Manufacturer.Local.ToBindingList();
             pictureBox1.ImageLocation = Path.Combine(ImageService.GetImageFolderPath(), product.image);
@@ -41,11 +41,28 @@ namespace DemoDemon.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog(this) != DialogResult.Cancel) return;
+            openFileDialog1.Title = "Выберите изображение";
+
+            if (openFileDialog1.ShowDialog(this) != DialogResult.OK) return;
 
             if (!openFileDialog1.CheckFileExists) return;
 
-            File.Copy(openFileDialog1.FileName, Path.Combine(ImageService.GetImageFolderPath(), openFileDialog1.SafeFileName));
+            string newImagePath = Path.Combine(ImageService.GetImageFolderPath(), openFileDialog1.SafeFileName);
+            File.Copy(openFileDialog1.FileName, newImagePath, true);
+
+            if (!String.IsNullOrEmpty(product.image))
+            {
+                bool otherImageLinks = model.Product.Count((p => p.image == product.image)) > 1;
+                string oldImagePath = Path.Combine(ImageService.GetImageFolderPath(), product.image);
+
+                if (!otherImageLinks && File.Exists(oldImagePath))
+                {
+                    File.Delete(oldImagePath);
+                }
+            }
+
+            product.image = openFileDialog1.SafeFileName;
+            pictureBox1.ImageLocation = Path.Combine(ImageService.GetImageFolderPath(), product.image);
         }
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -54,9 +71,9 @@ namespace DemoDemon.Forms
             model = null;
         }
 
-        private void manufacturerIDComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void saveButton_Click(object sender, EventArgs e)
         {
-
+            model.SaveChanges();
         }
     }
 }
