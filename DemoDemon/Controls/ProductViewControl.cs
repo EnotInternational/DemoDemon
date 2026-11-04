@@ -19,6 +19,17 @@ namespace DemoDemon.Controls
     {
         private int productId;
         private MainModel model;
+
+        public int ProductId {
+            get => productId;
+            set
+            {
+                productId = value;
+                productBindingSource.DataSource = model.Product.Find(ProductId);
+                LoadImage();
+            }
+        }
+
         public event Action<int> OnDelete;
         public ProductViewControl()
         {
@@ -27,21 +38,21 @@ namespace DemoDemon.Controls
         public ProductViewControl(int productId)
         {
             InitializeComponent();
-            this.productId = productId;
             model = new MainModel();
+            this.productId = productId;
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
             if (model == null) return;
-            productBindingSource.DataSource = model.Product.Find(productId);
+            productBindingSource.DataSource = model.Product.Find(ProductId);
             LoadImage();
         }
 
         private void LoadImage()
         {
-            Product product = model.Product.Find(productId);
+            Product product = model.Product.Find(ProductId);
             if (String.IsNullOrEmpty(product.image)) return;
             string ImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", product.image);
             pictureBox1.ImageLocation = ImagePath;
@@ -52,12 +63,12 @@ namespace DemoDemon.Controls
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            OnDelete?.Invoke(productId);
+            OnDelete?.Invoke(ProductId);
         }
 
         private void orderButton_Click(object sender, EventArgs e)
         {
-            ProductEditForm productEditForm = new ProductEditForm(productId);
+            ProductEditForm productEditForm = new ProductEditForm(ProductId);
             productEditForm.PreviousForm = ParentForm;
             productEditForm.Show();
 
@@ -70,7 +81,7 @@ namespace DemoDemon.Controls
         
         private void editButton_Click(object sender, EventArgs e)
         {
-            ProductEditForm form = new ProductEditForm(productId);
+            ProductEditForm form = new ProductEditForm(ProductId);
             form.PreviousForm = this.ParentForm;
             form.Show();
         }
