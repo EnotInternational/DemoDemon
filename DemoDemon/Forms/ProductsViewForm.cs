@@ -21,7 +21,8 @@ namespace DemoDemon.Forms
         private MainModel model = new MainModel();
         Stack<Control> controlsPool = new Stack<Control>();
         Subcategory subcategoryNullElement = new Subcategory { CategoryID = -1, CategoryName = AllCategoriesLabel, SubcategoryID = -1 };
-
+        BindingList<Subcategory> allSubcategories;
+        BindingList<Category> allCategories;
         public ProductsViewForm()
         {
             InitializeComponent();
@@ -32,15 +33,19 @@ namespace DemoDemon.Forms
             base.OnLoad(e);
 
             model.Category.Load();
+
+            allSubcategories = model.Subcategory.Local.ToBindingList();
+            allSubcategories.Prepend(subcategoryNullElement);
+
             Category categoryNullElement = new Category { CategoryID = -1, CategoryName = AllCategoriesLabel };
-            categoryComboBox.DataSource = model.Category.Local.Prepend(categoryNullElement).ToList();
+            allCategories = model.Category.Local.ToBindingList();
+            allCategories.Add(categoryNullElement);
+
+            categoryComboBox.DataSource = allCategories;
             categoryComboBox.DisplayMember = "CategoryName";
             categoryComboBox.SelectedItem = categoryNullElement;
 
-            model.Subcategory.Load();
-            subcategoryComboBox.DataSource = model.Subcategory.Local.Prepend(subcategoryNullElement).ToList();
-            subcategoryComboBox.DisplayMember = "CategoryName";
-            subcategoryComboBox.SelectedItem = subcategoryNullElement;
+            categoryComboBox.SelectedIndexChanged += new EventHandler(this.categoryComboBox_SelectedIndexChanged);
 
             UpdateList();
         }
@@ -70,11 +75,13 @@ namespace DemoDemon.Forms
 
         private bool FullProductFilter(Product product)
         {
+            Category category = (Category)categoryComboBox.SelectedValue;
             return
                 Regex.IsMatch(product.ProductName, searchTextBox.Text) &&
-                (subcategoryComboBox.SelectedText == AllCategoriesLabel || subcategoryComboBox.SelectedValue == null || product.Subcategory.CategoryID == ((Subcategory)subcategoryComboBox.SelectedValue).CategoryID);
-                //(categoryComboBox.SelectedText == AllCategoriesLabel || product.Subcategory.Category.CategoryID == ((Category)categoryComboBox.SelectedValue).CategoryID);
-                //Regex.IsMatch(product.ProductName, searchTextBox.Text);
+                (category.CategoryID == -1 ||
+                product.Subcategory.CategoryID == category.CategoryID);
+            //(categoryComboBox.SelectedText == AllCategoriesLabel || product.Subcategory.Category.CategoryID == ((Category)categoryComboBox.SelectedValue).CategoryID);
+            //Regex.IsMatch(product.ProductName, searchTextBox.Text);
 
         }
 
@@ -99,16 +106,6 @@ namespace DemoDemon.Forms
 
         private void categoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(categoryComboBox.SelectedText != AllCategoriesLabel)
-            {
-                subcategoryComboBox.Enabled = true;
-                subcategoryComboBox.DataSource = model.Subcategory.Local.Where(subctagory => subctagory.CategoryID == ((Category)categoryComboBox.SelectedValue).CategoryID).ToList();
-            }
-            else
-            {
-                subcategoryComboBox.SelectedItem = subcategoryNullElement;
-                subcategoryComboBox.Enabled = false;
-            }
             UpdateList();
         }
 

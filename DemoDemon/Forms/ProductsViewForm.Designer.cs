@@ -31,7 +31,6 @@
             this.currentOrderButton = new System.Windows.Forms.Button();
             this.categoryComboBox = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.subcategoryComboBox = new System.Windows.Forms.ComboBox();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -55,7 +54,6 @@
             this.categoryComboBox.Name = "categoryComboBox";
             this.categoryComboBox.Size = new System.Drawing.Size(121, 21);
             this.categoryComboBox.TabIndex = 5;
-            this.categoryComboBox.SelectedIndexChanged += new System.EventHandler(this.categoryComboBox_SelectedIndexChanged);
             // 
             // flowLayoutPanel1
             // 
@@ -67,16 +65,6 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(577, 238);
             this.flowLayoutPanel1.TabIndex = 3;
             this.flowLayoutPanel1.WrapContents = false;
-            // 
-            // subcategoryComboBox
-            // 
-            this.subcategoryComboBox.Enabled = false;
-            this.subcategoryComboBox.FormattingEnabled = true;
-            this.subcategoryComboBox.Location = new System.Drawing.Point(187, 28);
-            this.subcategoryComboBox.Name = "subcategoryComboBox";
-            this.subcategoryComboBox.Size = new System.Drawing.Size(121, 21);
-            this.subcategoryComboBox.TabIndex = 6;
-            this.subcategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.subcategoryComboBox_SelectedIndexChanged);
             // 
             // searchTextBox
             // 
@@ -111,7 +99,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.searchTextBox);
-            this.Controls.Add(this.subcategoryComboBox);
             this.Controls.Add(this.categoryComboBox);
             this.Controls.Add(this.currentOrderButton);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -119,7 +106,6 @@
             this.Controls.SetChildIndex(this.flowLayoutPanel1, 0);
             this.Controls.SetChildIndex(this.currentOrderButton, 0);
             this.Controls.SetChildIndex(this.categoryComboBox, 0);
-            this.Controls.SetChildIndex(this.subcategoryComboBox, 0);
             this.Controls.SetChildIndex(this.searchTextBox, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
@@ -132,7 +118,6 @@
         private System.Windows.Forms.Button currentOrderButton;
         private System.Windows.Forms.ComboBox categoryComboBox;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.ComboBox subcategoryComboBox;
         private System.Windows.Forms.TextBox searchTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
