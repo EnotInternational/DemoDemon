@@ -62,6 +62,7 @@ namespace DemoDemon.Forms
                 {
                     control = (ProductViewControl)controlsPool.Pop();
                     control.ProductId = product.ProductID;
+                    control.OnProductSelected += OnProductSelected;
                 }
                 else
                 {
@@ -89,11 +90,16 @@ namespace DemoDemon.Forms
         {
             
         }
+        public void OnProductSelected(int productId)
+        {
+            ProductEditForm productEditForm = new ProductEditForm(productId);
+            productEditForm.PreviousForm = ParentForm;
+            productEditForm.Show();
+        }
 
         private void currentOrderButton_Click(object sender, EventArgs e)
         {
-            OrderEditForm form = new OrderEditForm();
-            form.order = OrderService.Instance.PendingOrder;
+            PendingOrderEditForm form = new PendingOrderEditForm(OrderService.Instance.PendingOrder);
             form.PreviousForm = this;
             form.Show();
             Hide();

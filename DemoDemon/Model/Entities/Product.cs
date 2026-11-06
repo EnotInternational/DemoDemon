@@ -5,6 +5,7 @@ namespace DemoDemon.Model
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     [Table("Product")]
     public partial class Product
@@ -39,6 +40,8 @@ namespace DemoDemon.Model
         public string image { get; set; }
 
         public virtual Manufacturer Manufacturer { get; set; }
+        [NotMapped]
+        public int QuantityAvailable{ get => StockItem.Sum(item => item.QuantityAvailable); }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItem { get; set; }

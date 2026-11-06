@@ -19,7 +19,7 @@ namespace DemoDemon.Controls
     {
         private int productId;
         private MainModel model;
-
+        public event Action<int> OnProductSelected;
         public int ProductId {
             get => productId;
             set
@@ -46,19 +46,29 @@ namespace DemoDemon.Controls
         {
             base.OnLoad(e);
             if (model == null) return;
-            productBindingSource.DataSource = model.Product.Find(ProductId);
+            Product product = model.Product.Find(ProductId);
+            productBindingSource.DataSource = product;
+            amountLabel.Text = product.QuantityAvailable > 5 ? "Много" : "Мало";
+            if (product.QuantityAvailable <= 3)
+            {
+                productNameLabel1.ForeColor = Color.Red;
+                manufacturerNameLabel1.ForeColor = Color.Red;
+            }
             LoadImage();
         }
 
+        private void CanApplyDiscount()
+        {
+            from p in model.Product
+            //join orderItem in model.OrderItem on orderItem.OrderID equals productId
+
+        }
         private void LoadImage()
         {
             Product product = model.Product.Find(ProductId);
             if (String.IsNullOrEmpty(product.image)) return;
             string ImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", product.image);
             pictureBox1.ImageLocation = ImagePath;
-
-            deleteButton.Visible = AuthService.Instance.UserData.ProductConstraint.HasFlag(UserConstraint.Delete);
-            editButton.Visible = AuthService.Instance.UserData.ProductConstraint.HasFlag(UserConstraint.Edit);
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -68,10 +78,7 @@ namespace DemoDemon.Controls
 
         private void orderButton_Click(object sender, EventArgs e)
         {
-            ProductEditForm productEditForm = new ProductEditForm(ProductId);
-            productEditForm.PreviousForm = ParentForm;
-            productEditForm.Show();
-
+            OnProductSelected?.Invoke(productId);
         }
         protected override void OnHandleDestroyed(EventArgs e)
         {

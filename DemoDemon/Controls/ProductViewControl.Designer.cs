@@ -31,14 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.orderButton = new System.Windows.Forms.Button();
-            this.deleteButton = new System.Windows.Forms.Button();
-            this.editButton = new System.Windows.Forms.Button();
             this.manufacturerNameLabel1 = new System.Windows.Forms.Label();
             this.productNameLabel1 = new System.Windows.Forms.Label();
             this.priceLabel1 = new System.Windows.Forms.Label();
             this.categoryNameLabel1 = new System.Windows.Forms.Label();
             this.categoryNameLabel2 = new System.Windows.Forms.Label();
             this.compoundLabel1 = new System.Windows.Forms.Label();
+            this.amountLabel = new System.Windows.Forms.Label();
             this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
@@ -59,29 +58,9 @@
             this.orderButton.Name = "orderButton";
             this.orderButton.Size = new System.Drawing.Size(132, 23);
             this.orderButton.TabIndex = 6;
-            this.orderButton.Text = "Заказать";
+            this.orderButton.Text = "Выбрать";
             this.orderButton.UseVisualStyleBackColor = true;
             this.orderButton.Click += new System.EventHandler(this.orderButton_Click);
-            // 
-            // deleteButton
-            // 
-            this.deleteButton.Location = new System.Drawing.Point(608, 48);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(132, 23);
-            this.deleteButton.TabIndex = 7;
-            this.deleteButton.Text = "Удалить";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
-            // 
-            // editButton
-            // 
-            this.editButton.Location = new System.Drawing.Point(608, 19);
-            this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(132, 23);
-            this.editButton.TabIndex = 8;
-            this.editButton.Text = "Редактировать";
-            this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
             // manufacturerNameLabel1
             // 
@@ -134,11 +113,19 @@
             // compoundLabel1
             // 
             this.compoundLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productBindingSource, "Compound", true));
-            this.compoundLabel1.Location = new System.Drawing.Point(142, 83);
+            this.compoundLabel1.Location = new System.Drawing.Point(142, 106);
             this.compoundLabel1.Name = "compoundLabel1";
             this.compoundLabel1.Size = new System.Drawing.Size(449, 23);
             this.compoundLabel1.TabIndex = 15;
             this.compoundLabel1.Text = "Состав";
+            // 
+            // amountLabel
+            // 
+            this.amountLabel.Location = new System.Drawing.Point(142, 80);
+            this.amountLabel.Name = "amountLabel";
+            this.amountLabel.Size = new System.Drawing.Size(449, 23);
+            this.amountLabel.TabIndex = 16;
+            this.amountLabel.Text = "Количетво";
             // 
             // productBindingSource
             // 
@@ -148,14 +135,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.amountLabel);
             this.Controls.Add(this.compoundLabel1);
             this.Controls.Add(this.categoryNameLabel2);
             this.Controls.Add(this.categoryNameLabel1);
             this.Controls.Add(this.priceLabel1);
             this.Controls.Add(this.productNameLabel1);
             this.Controls.Add(this.manufacturerNameLabel1);
-            this.Controls.Add(this.editButton);
-            this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.orderButton);
             this.Controls.Add(this.pictureBox1);
             this.Name = "ProductViewControl";
@@ -170,8 +156,6 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button orderButton;
-        private System.Windows.Forms.Button deleteButton;
-        private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.BindingSource productBindingSource;
         private System.Windows.Forms.Label manufacturerNameLabel1;
         private System.Windows.Forms.Label productNameLabel1;
@@ -179,5 +163,6 @@
         private System.Windows.Forms.Label categoryNameLabel1;
         private System.Windows.Forms.Label categoryNameLabel2;
         private System.Windows.Forms.Label compoundLabel1;
+        private System.Windows.Forms.Label amountLabel;
     }
 }

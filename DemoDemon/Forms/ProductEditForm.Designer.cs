@@ -180,6 +180,7 @@
             // productNameTextBox
             // 
             this.productNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productBindingSource, "ProductName", true));
+            this.productNameTextBox.Enabled = false;
             this.productNameTextBox.Location = new System.Drawing.Point(426, 60);
             this.productNameTextBox.Name = "productNameTextBox";
             this.productNameTextBox.Size = new System.Drawing.Size(121, 22);

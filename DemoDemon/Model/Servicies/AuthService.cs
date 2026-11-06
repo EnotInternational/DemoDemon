@@ -36,7 +36,7 @@ namespace DemoDemon.Model.Servicies
                             UserFio = $"{user.MiddleName} {user.FirstName} {user.FirstName}",
                             UserRole = userRole,
                             BaseForm = new ManagerForm(),
-                            OrderConstraint = UserConstraint.Read | UserConstraint.Add | UserConstraint.Delete,
+                            OrderConstraint = UserConstraint.Read | UserConstraint.Edit| UserConstraint.Add | UserConstraint.Delete,
                             ProductConstraint = UserConstraint.Read
                         };
                         break;

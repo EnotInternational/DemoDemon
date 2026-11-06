@@ -13,9 +13,13 @@ namespace DemoDemon.Model.Entities
 {
     public partial class OrderEditForm : DemoDemon.Forms.BaseForm
     {
-        private readonly int orderId;
-        MainModel model = new MainModel();
+        protected readonly int orderId;
+        protected MainModel model = new MainModel();
         public Order order;
+        public OrderEditForm()
+        {
+            InitializeComponent();
+        }
         public OrderEditForm(int orderId = -1)
         {
             InitializeComponent();
@@ -30,17 +34,16 @@ namespace DemoDemon.Model.Entities
             userBindingSource.DataSource = model.User.Local;
 
             if(orderId != -1)
+            {
                 order = model.Order.Find(orderId);
-            else if(order == null)
-                order = new Order();
+                orderBindingSource.DataSource = order;
+                model.OrderItem.Where(orderItem => orderItem.OrderID == orderId).Load();
+                orderItemBindingSource.DataSource = model.OrderItem.Local.ToBindingList();
+            }
 
-            orderBindingSource.DataSource = order;
-            model.OrderItem.Where(orderItem => orderItem.OrderID == orderId).Load();
-            orderItemBindingSource.DataSource = model.OrderItem.Local.ToBindingList();
+            sumLabel.Text = ((ICollection<OrderItem>)orderItemBindingSource.DataSource).Sum(item => item.UniyPrice * item.Quantity).ToString();
 
-            sumLabel.Text = model.OrderItem.Local.Sum(item => item.UniyPrice * item.Quantity).ToString();
-
-            if (orderId != -1 || !AuthService.Instance.UserData.OrderConstraint.HasFlag(UserConstraint.Edit))
+            if (!AuthService.Instance.UserData.OrderConstraint.HasFlag(UserConstraint.Edit))
             {
                 orderDateDateTimePicker.Enabled = false;
                 userFioComboBox.Enabled = false;

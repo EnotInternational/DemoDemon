@@ -22,9 +22,9 @@ namespace DemoDemon.Model
 
     public enum UserConstraint
     {
-       Read = 0,
-       Edit = 1,
-       Add = 2,
-       Delete = 4,
+       Read = 1 << 0,
+       Edit = 1 << 1,
+       Add = 1 << 2,
+       Delete = 1 << 3
     }
 }

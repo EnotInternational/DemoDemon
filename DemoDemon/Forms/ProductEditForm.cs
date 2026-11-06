@@ -16,7 +16,7 @@ namespace DemoDemon.Forms
 {
     public partial class ProductEditForm : BaseForm
     {
-        private int productId;
+        protected int productId;
         MainModel model = new MainModel();
         Product product;
         public ProductEditForm(int productId)
@@ -42,7 +42,7 @@ namespace DemoDemon.Forms
             openFileDialog1.Filter = "Изображения (*.png; *.jpg; *.jpeg; *.bmp) | *.png; *.jpg; *.jpeg; *.bmp";
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        protected void button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.Title = "Выберите изображение";
 
@@ -64,8 +64,6 @@ namespace DemoDemon.Forms
                 }
             }
 
-
-
             product.image = openFileDialog1.SafeFileName;
             pictureBox1.ImageLocation = Path.Combine(ImageService.GetImageFolderPath(), product.image);
         }
@@ -76,28 +74,31 @@ namespace DemoDemon.Forms
             model = null;
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        protected void saveButton_Click(object sender, EventArgs e)
         {
             model.SaveChanges();
         }
 
-        private void orderButton_Click(object sender, EventArgs e)
+        protected void orderButton_Click(object sender, EventArgs e)
         {
             Model.Size size = (Model.Size)sizeBindingSource.Current;
             OrderService.Instance.PendingOrder.OrderItem.Add(
                 new OrderItem()
                 {
+                    OrderID = OrderService.Instance.PendingOrder.OrderID,
+                    ProductID = product.ProductID,
                     Product = product,
                     Quantity = (int)quantityNumericUpDown.Value,
                     UniyPrice = product.Price,
-                    SizeID = size.SizeID
+                    SizeID = size.SizeID,
+                    Size = size
                 }
             );
             model.SaveChanges();
             MessageBox.Show("Заказ добавлен");
         }
 
-        private void sizeDataGridView_SelectionChanged(object sender, EventArgs e)
+        protected void sizeDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             orderButton.Enabled = true;
         }
