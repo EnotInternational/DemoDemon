@@ -23,9 +23,15 @@ namespace DemoDemon.Forms
         {
             base.OnLoad(e);
 
-            if(AuthService.Instance != null)
+            if (AuthService.Instance == null) return;
+
+            if (AuthService.Instance.UserData != null)
             {
                 fioLabel.Text = AuthService.Instance.UserData.UserFio;
+            }
+            else
+            {
+                fioLabel.Text = "Гость";
             }
         }
         private void backButton_Click(object sender, EventArgs e)

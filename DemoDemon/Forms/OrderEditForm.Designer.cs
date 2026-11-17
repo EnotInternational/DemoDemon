@@ -38,6 +38,8 @@
             this.sumLabel = new System.Windows.Forms.Label();
             this.orderItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.orderItemDataGridView = new System.Windows.Forms.DataGridView();
+            this.userFioComboBox = new System.Windows.Forms.ComboBox();
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,8 +49,6 @@
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userFioComboBox = new System.Windows.Forms.ComboBox();
-            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             orderDateLabel = new System.Windows.Forms.Label();
             userFioLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
@@ -62,18 +62,18 @@
             orderDateLabel.AutoSize = true;
             orderDateLabel.Location = new System.Drawing.Point(12, 44);
             orderDateLabel.Name = "orderDateLabel";
-            orderDateLabel.Size = new System.Drawing.Size(76, 16);
+            orderDateLabel.Size = new System.Drawing.Size(42, 16);
             orderDateLabel.TabIndex = 3;
-            orderDateLabel.Text = "Order Date:";
+            orderDateLabel.Text = "Дата:";
             // 
             // userFioLabel
             // 
             userFioLabel.AutoSize = true;
-            userFioLabel.Location = new System.Drawing.Point(27, 71);
+            userFioLabel.Location = new System.Drawing.Point(13, 71);
             userFioLabel.Name = "userFioLabel";
-            userFioLabel.Size = new System.Drawing.Size(61, 16);
+            userFioLabel.Size = new System.Drawing.Size(41, 16);
             userFioLabel.TabIndex = 11;
-            userFioLabel.Text = "User Fio:";
+            userFioLabel.Text = "ФИО:";
             // 
             // orderDateDateTimePicker
             // 
@@ -144,6 +144,22 @@
             this.orderItemDataGridView.Size = new System.Drawing.Size(880, 220);
             this.orderItemDataGridView.TabIndex = 11;
             // 
+            // userFioComboBox
+            // 
+            this.userFioComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.orderBindingSource, "UserID", true));
+            this.userFioComboBox.DataSource = this.userBindingSource;
+            this.userFioComboBox.DisplayMember = "Fio";
+            this.userFioComboBox.FormattingEnabled = true;
+            this.userFioComboBox.Location = new System.Drawing.Point(94, 68);
+            this.userFioComboBox.Name = "userFioComboBox";
+            this.userFioComboBox.Size = new System.Drawing.Size(200, 24);
+            this.userFioComboBox.TabIndex = 12;
+            this.userFioComboBox.ValueMember = "UserID";
+            // 
+            // userBindingSource
+            // 
+            this.userBindingSource.DataSource = typeof(DemoDemon.Model.User);
+            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "OrderItemID";
@@ -187,7 +203,7 @@
             // dataGridViewTextBoxColumn11
             // 
             this.dataGridViewTextBoxColumn11.DataPropertyName = "ProductName";
-            this.dataGridViewTextBoxColumn11.HeaderText = "ProductName";
+            this.dataGridViewTextBoxColumn11.HeaderText = "Название продукта";
             this.dataGridViewTextBoxColumn11.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
@@ -196,7 +212,7 @@
             // dataGridViewTextBoxColumn12
             // 
             this.dataGridViewTextBoxColumn12.DataPropertyName = "ManufacturerName";
-            this.dataGridViewTextBoxColumn12.HeaderText = "ManufacturerName";
+            this.dataGridViewTextBoxColumn12.HeaderText = "Производитель";
             this.dataGridViewTextBoxColumn12.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             this.dataGridViewTextBoxColumn12.ReadOnly = true;
@@ -205,7 +221,7 @@
             // dataGridViewTextBoxColumn10
             // 
             this.dataGridViewTextBoxColumn10.DataPropertyName = "SizeValue";
-            this.dataGridViewTextBoxColumn10.HeaderText = "SizeValue";
+            this.dataGridViewTextBoxColumn10.HeaderText = "Размер";
             this.dataGridViewTextBoxColumn10.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
@@ -214,7 +230,7 @@
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.DataPropertyName = "Quantity";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Quantity";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Кол-во";
             this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
@@ -223,27 +239,11 @@
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "UniyPrice";
-            this.dataGridViewTextBoxColumn6.HeaderText = "UniyPrice";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Цена за ед.";
             this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
             this.dataGridViewTextBoxColumn6.Width = 125;
-            // 
-            // userFioComboBox
-            // 
-            this.userFioComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.orderBindingSource, "UserID", true));
-            this.userFioComboBox.DataSource = this.userBindingSource;
-            this.userFioComboBox.DisplayMember = "Fio";
-            this.userFioComboBox.FormattingEnabled = true;
-            this.userFioComboBox.Location = new System.Drawing.Point(94, 68);
-            this.userFioComboBox.Name = "userFioComboBox";
-            this.userFioComboBox.Size = new System.Drawing.Size(200, 24);
-            this.userFioComboBox.TabIndex = 12;
-            this.userFioComboBox.ValueMember = "UserID";
-            // 
-            // userBindingSource
-            // 
-            this.userBindingSource.DataSource = typeof(DemoDemon.Model.User);
             // 
             // OrderEditForm
             // 
@@ -258,6 +258,7 @@
             this.Controls.Add(orderDateLabel);
             this.Controls.Add(this.orderDateDateTimePicker);
             this.Name = "OrderEditForm";
+            this.Text = "Заказ";
             this.Controls.SetChildIndex(this.orderDateDateTimePicker, 0);
             this.Controls.SetChildIndex(orderDateLabel, 0);
             this.Controls.SetChildIndex(this.addOrderItemButton, 0);
@@ -284,6 +285,8 @@
         private System.Windows.Forms.Label sumLabel;
         private System.Windows.Forms.BindingSource orderItemBindingSource;
         private System.Windows.Forms.DataGridView orderItemDataGridView;
+        private System.Windows.Forms.ComboBox userFioComboBox;
+        private System.Windows.Forms.BindingSource userBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -293,7 +296,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.ComboBox userFioComboBox;
-        private System.Windows.Forms.BindingSource userBindingSource;
     }
 }

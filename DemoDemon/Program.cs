@@ -20,7 +20,7 @@ namespace DemoDemon
             Application.SetCompatibleTextRenderingDefault(false);
             OrderService orderService = new OrderService();
             AuthService authService = new AuthService();
-            Application.Run(new AuthForm());
+            Application.Run(new ProductsViewForm());
         }
     }
 }

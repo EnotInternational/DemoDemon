@@ -59,6 +59,7 @@
             this.Controls.Add(this.ordersButton);
             this.Controls.Add(this.productsButton);
             this.Name = "ManagerForm";
+            this.Text = "Менеджер";
             this.Controls.SetChildIndex(this.productsButton, 0);
             this.Controls.SetChildIndex(this.ordersButton, 0);
             this.ResumeLayout(false);

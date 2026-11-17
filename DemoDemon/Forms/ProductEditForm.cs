@@ -28,6 +28,12 @@ namespace DemoDemon.Forms
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
+            orderButton.Enabled = AuthService.Instance.UserData != null;
+            orderButton.Visible = AuthService.Instance.UserData != null;
+            sizeDataGridView.Enabled = AuthService.Instance.UserData != null;
+            quantityNumericUpDown.Enabled = AuthService.Instance.UserData != null;
+
             product = model.Product.Find(productId);
             productBindingSource.DataSource = product;
             model.Subcategory.Load();
@@ -38,7 +44,13 @@ namespace DemoDemon.Forms
             GetAvailableSizes(productId).Load();
             sizeBindingSource.DataSource = model.Size.Local.ToBindingList();
             manufacturerBindingSource.DataSource = model.Manufacturer.Local.ToBindingList();
-            pictureBox1.ImageLocation = Path.Combine(ImageService.GetImageFolderPath(), product.image);
+            string ImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", product.image);
+            if (!File.Exists(ImagePath))
+            {
+                ImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "picture.png");
+            }
+            pictureBox1.ImageLocation = ImagePath;
+            
             openFileDialog1.Filter = "Изображения (*.png; *.jpg; *.jpeg; *.bmp) | *.png; *.jpg; *.jpeg; *.bmp";
         }
 

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -51,23 +52,41 @@ namespace DemoDemon.Controls
             amountLabel.Text = product.QuantityAvailable > 5 ? "Много" : "Мало";
             if (product.QuantityAvailable <= 3)
             {
-                productNameLabel1.ForeColor = Color.Red;
-                manufacturerNameLabel1.ForeColor = Color.Red;
+                productNameLabel1.ForeColor = ColorTranslator.FromHtml("#FF8080");
+                manufacturerNameLabel1.ForeColor = ColorTranslator.FromHtml("#FF8080");
+            }
+            priceLabel1.Text = (product.Price).ToString();
+
+            if (CanApplyDiscount())
+            {
+                double price = Convert.ToDouble(product.Price);
+                priceLabel1.ForeColor = ColorTranslator.FromHtml("#FF8080");
+                oldPriceLabel.Text = price.ToString();
+                priceLabel1.Text = (price - price * 0.25).ToString();
             }
             LoadImage();
         }
 
-        private void CanApplyDiscount()
+        private bool CanApplyDiscount()
         {
-            from p in model.Product
-            //join orderItem in model.OrderItem on orderItem.OrderID equals productId
+            DateTime dateTime = DateTime.Now.AddMonths(-1);
 
+            IQueryable<Product> query = from p in model.Product
+            join orderItem in model.OrderItem on p.ProductID equals orderItem.ProductID
+            join order in model.Order on orderItem.OrderID equals order.OrderID
+            where order.OrderDate >= dateTime
+            where p.ProductID == productId
+            select p;
+            return query.Count() == 0;
         }
         private void LoadImage()
         {
             Product product = model.Product.Find(ProductId);
-            if (String.IsNullOrEmpty(product.image)) return;
             string ImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", product.image);
+            if(!File.Exists(ImagePath))
+            {
+                ImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "picture.png");
+            }
             pictureBox1.ImageLocation = ImagePath;
         }
 
@@ -84,7 +103,7 @@ namespace DemoDemon.Controls
         {
             base.OnHandleDestroyed(e);
             model?.Dispose();
-        }
+        } 
         
         private void editButton_Click(object sender, EventArgs e)
         {

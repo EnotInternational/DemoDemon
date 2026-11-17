@@ -49,7 +49,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.saveButton = new System.Windows.Forms.Button();
             this.sizeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sizeDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,6 +64,7 @@
             priceLabel = new System.Windows.Forms.Label();
             productNameLabel = new System.Windows.Forms.Label();
             subcategoryIDLabel = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.manufacturerBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subcategoryBindingSource)).BeginInit();
@@ -76,6 +76,14 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.quantityNumericUpDown)).BeginInit();
             this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.Size = new System.Drawing.Size(800, 30);
+            // 
+            // fioLabel
+            // 
+            this.fioLabel.Location = new System.Drawing.Point(186, 3);
             // 
             // compoundLabel
             // 
@@ -138,6 +146,7 @@
             // compoundTextBox
             // 
             this.compoundTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productBindingSource, "Compound", true));
+            this.compoundTextBox.Enabled = false;
             this.compoundTextBox.Location = new System.Drawing.Point(425, 158);
             this.compoundTextBox.Multiline = true;
             this.compoundTextBox.Name = "compoundTextBox";
@@ -147,6 +156,7 @@
             // desctiptionTextBox
             // 
             this.desctiptionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productBindingSource, "Desctiption", true));
+            this.desctiptionTextBox.Enabled = false;
             this.desctiptionTextBox.Location = new System.Drawing.Point(425, 92);
             this.desctiptionTextBox.Multiline = true;
             this.desctiptionTextBox.Name = "desctiptionTextBox";
@@ -158,6 +168,7 @@
             this.manufacturerIDComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.productBindingSource, "ManufacturerID", true));
             this.manufacturerIDComboBox.DataSource = this.manufacturerBindingSource;
             this.manufacturerIDComboBox.DisplayMember = "ManufacturerName";
+            this.manufacturerIDComboBox.Enabled = false;
             this.manufacturerIDComboBox.FormattingEnabled = true;
             this.manufacturerIDComboBox.Location = new System.Drawing.Point(426, 243);
             this.manufacturerIDComboBox.Name = "manufacturerIDComboBox";
@@ -172,6 +183,7 @@
             // priceTextBox
             // 
             this.priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productBindingSource, "Price", true));
+            this.priceTextBox.Enabled = false;
             this.priceTextBox.Location = new System.Drawing.Point(426, 315);
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.Size = new System.Drawing.Size(121, 22);
@@ -191,6 +203,7 @@
             this.subcategoryIDComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.productBindingSource, "SubcategoryID", true));
             this.subcategoryIDComboBox.DataSource = this.subcategoryBindingSource;
             this.subcategoryIDComboBox.DisplayMember = "FullCategoryName";
+            this.subcategoryIDComboBox.Enabled = false;
             this.subcategoryIDComboBox.FormattingEnabled = true;
             this.subcategoryIDComboBox.Location = new System.Drawing.Point(426, 273);
             this.subcategoryIDComboBox.Name = "subcategoryIDComboBox";
@@ -211,7 +224,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(21, 60);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(281, 245);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 18;
             this.pictureBox1.TabStop = false;
             // 
@@ -223,6 +236,7 @@
             this.button1.TabIndex = 19;
             this.button1.Text = "Выбрать изображение";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // openFileDialog1
@@ -233,16 +247,6 @@
             // 
             this.userBindingSource.DataSource = typeof(DemoDemon.Model.User);
             // 
-            // saveButton
-            // 
-            this.saveButton.Location = new System.Drawing.Point(680, 419);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(98, 23);
-            this.saveButton.TabIndex = 20;
-            this.saveButton.Text = "Сохранить";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
             // sizeBindingSource
             // 
             this.sizeBindingSource.DataSource = typeof(DemoDemon.Model.Size);
@@ -250,6 +254,7 @@
             // sizeDataGridView
             // 
             this.sizeDataGridView.AllowUserToAddRows = false;
+            this.sizeDataGridView.AllowUserToDeleteRows = false;
             this.sizeDataGridView.AllowUserToResizeColumns = false;
             this.sizeDataGridView.AllowUserToResizeRows = false;
             this.sizeDataGridView.AutoGenerateColumns = false;
@@ -263,6 +268,8 @@
             this.sizeDataGridView.Location = new System.Drawing.Point(6, 21);
             this.sizeDataGridView.MultiSelect = false;
             this.sizeDataGridView.Name = "sizeDataGridView";
+            this.sizeDataGridView.ReadOnly = true;
+            this.sizeDataGridView.RowHeadersVisible = false;
             this.sizeDataGridView.RowHeadersWidth = 51;
             this.sizeDataGridView.RowTemplate.Height = 24;
             this.sizeDataGridView.Size = new System.Drawing.Size(176, 144);
@@ -275,15 +282,17 @@
             this.dataGridViewTextBoxColumn1.HeaderText = "SizeID";
             this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Visible = false;
             this.dataGridViewTextBoxColumn1.Width = 125;
             // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "SizeValue";
-            this.dataGridViewTextBoxColumn2.HeaderText = "SizeValue";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Размер";
             this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             this.dataGridViewTextBoxColumn2.Width = 125;
             // 
             // dataGridViewTextBoxColumn3
@@ -292,6 +301,7 @@
             this.dataGridViewTextBoxColumn3.HeaderText = "OrderItem";
             this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
             this.dataGridViewTextBoxColumn3.Visible = false;
             this.dataGridViewTextBoxColumn3.Width = 125;
             // 
@@ -301,6 +311,7 @@
             this.dataGridViewTextBoxColumn4.HeaderText = "StockItem";
             this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
             this.dataGridViewTextBoxColumn4.Visible = false;
             this.dataGridViewTextBoxColumn4.Width = 125;
             // 
@@ -314,7 +325,7 @@
             this.groupBox1.Size = new System.Drawing.Size(336, 178);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "Заказ";
             // 
             // orderButton
             // 
@@ -330,9 +341,19 @@
             // quantityNumericUpDown
             // 
             this.quantityNumericUpDown.Location = new System.Drawing.Point(188, 21);
+            this.quantityNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.quantityNumericUpDown.Name = "quantityNumericUpDown";
             this.quantityNumericUpDown.Size = new System.Drawing.Size(120, 22);
             this.quantityNumericUpDown.TabIndex = 21;
+            this.quantityNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // ProductEditForm
             // 
@@ -340,7 +361,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 551);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(compoundLabel);
@@ -357,6 +377,7 @@
             this.Controls.Add(this.subcategoryIDComboBox);
             this.Name = "ProductEditForm";
             this.Text = "ProductEditForm";
+            this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.subcategoryIDComboBox, 0);
             this.Controls.SetChildIndex(subcategoryIDLabel, 0);
             this.Controls.SetChildIndex(this.productNameTextBox, 0);
@@ -371,8 +392,8 @@
             this.Controls.SetChildIndex(compoundLabel, 0);
             this.Controls.SetChildIndex(this.pictureBox1, 0);
             this.Controls.SetChildIndex(this.button1, 0);
-            this.Controls.SetChildIndex(this.saveButton, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.manufacturerBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.subcategoryBindingSource)).EndInit();
@@ -404,15 +425,14 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.BindingSource userBindingSource;
         private System.Windows.Forms.BindingSource subcategoryBindingSource;
-        private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.BindingSource sizeBindingSource;
         private System.Windows.Forms.DataGridView sizeDataGridView;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.NumericUpDown quantityNumericUpDown;
+        private System.Windows.Forms.Button orderButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.NumericUpDown quantityNumericUpDown;
-        private System.Windows.Forms.Button orderButton;
     }
 }

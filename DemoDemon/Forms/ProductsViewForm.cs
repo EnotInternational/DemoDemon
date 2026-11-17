@@ -19,7 +19,6 @@ namespace DemoDemon.Forms
     {
         private const string AllCategoriesLabel = "Все категории";
         private MainModel model = new MainModel();
-        Stack<Control> controlsPool = new Stack<Control>();
         Subcategory subcategoryNullElement = new Subcategory { CategoryID = -1, CategoryName = AllCategoriesLabel, SubcategoryID = -1 };
         BindingList<Subcategory> allSubcategories;
         BindingList<Category> allCategories;
@@ -47,29 +46,37 @@ namespace DemoDemon.Forms
 
             categoryComboBox.SelectedIndexChanged += new EventHandler(this.categoryComboBox_SelectedIndexChanged);
 
+            sortComboBox.Items.AddRange(new string[] {SortType.NoSort, SortType.PriceAsc, SortType.PriceDesc});
+            sortComboBox.SelectedItem = SortType.NoSort;
+
             UpdateList();
+
+            currentOrderButton.Visible = AuthService.Instance.UserData != null;
+            sortComboBox.Enabled = AuthService.Instance.UserData != null;
+            categoryComboBox.Enabled = AuthService.Instance.UserData != null;
+            searchTextBox.Enabled = AuthService.Instance.UserData != null;
+            authoriseButton.Visible = AuthService.Instance.UserData == null;
         }
 
         private void UpdateList()
         {
             flowLayoutPanel1.Controls.Clear();
             IEnumerable<Product> filtered = model.Product.Where(FullProductFilter);
+            switch(sortComboBox.SelectedItem)
+            {
+                case SortType.NoSort:
+                    break;
+                case SortType.PriceAsc:
+                    filtered = filtered.OrderBy(product => product.Price);
+                    break;
+                case SortType.PriceDesc:
+                    filtered = filtered.OrderByDescending(product => product.Price);
+                    break;
+            }
             foreach (Product product in filtered)
             {
-
-                ProductViewControl control;
-                if (controlsPool.Count > 0)
-                {
-                    control = (ProductViewControl)controlsPool.Pop();
-                    control.ProductId = product.ProductID;
-                    control.OnProductSelected += OnProductSelected;
-                }
-                else
-                {
-                    control = new ProductViewControl(product.ProductID);
-                    controlsPool.Push(control);
-                }
-
+                ProductViewControl control = new ProductViewControl(product.ProductID);
+                control.OnProductSelected += OnProductSelected;
                 flowLayoutPanel1.Controls.Add(control);
             }
         }
@@ -93,7 +100,7 @@ namespace DemoDemon.Forms
         public void OnProductSelected(int productId)
         {
             ProductEditForm productEditForm = new ProductEditForm(productId);
-            productEditForm.PreviousForm = ParentForm;
+            productEditForm.PreviousForm = this;
             productEditForm.Show();
         }
 
@@ -119,6 +126,25 @@ namespace DemoDemon.Forms
         {
             UpdateList();
 
+        }
+
+        private void Authorise_Click(object sender, EventArgs e)
+        {
+            AuthForm authForm = new AuthForm();
+            authForm.Show();
+            this.Hide();
+        }
+
+        private void sortComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateList();
+        }
+
+        static class SortType
+        {
+            public const string NoSort = "Нет";
+            public const string PriceAsc = "По возрастанию цены";
+            public const string PriceDesc = "По убыванию цены";
         }
     }
 }
